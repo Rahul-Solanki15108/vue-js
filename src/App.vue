@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div class="card">
+      <TabMenu :model="items" />
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { ref } from "vue";
+import TabMenu from "primevue/tabmenu";
 export default {
-  name: 'App',
+  name: "App",
+  setup() {
+    const active = ref(3);
+    const items = ref([
+      {
+        label: "Home",
+        icon: "pi pi-fw pi-home",
+        to: "/",
+      },
+      {
+        label: "Products",
+        icon: "pi pi-fw pi-calendar",
+        to: "/products",
+      },
+    ]);
+
+    return { active, items };
+  },
   components: {
-    HelloWorld
-  }
-}
+    TabMenu,
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped lang="scss">
+::v-deep(.tabmenudemo-content) {
+  padding: 2rem 1rem;
 }
 </style>
